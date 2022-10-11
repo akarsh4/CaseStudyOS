@@ -1,0 +1,29 @@
+package com.sonata.controller;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.sonata.model.orders;
+import com.sonata.repository.OrderRepository;
+
+
+@CrossOrigin(origins="http//localhost:3000")
+@RestController
+
+public class OrderController {
+	Optional<orders> p1;
+	
+	@Autowired
+	private OrderRepository orepository;
+	
+	@GetMapping("/order")
+	public List<orders> getAllOrderItem(){
+		return orepository.findAll();
+	}
+	
+}

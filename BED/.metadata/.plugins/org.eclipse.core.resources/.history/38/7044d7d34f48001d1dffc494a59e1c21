@@ -1,0 +1,63 @@
+package com.sonata.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sonata.model.products;
+import com.sonata.model.user;
+import com.sonata.repository.RegistrationRepository;
+import com.sonata.service.RegistrationService;
+
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
+public class RegisterController {
+	
+	@Autowired
+	private RegistrationService service;
+	
+	@Autowired
+	private RegistrationRepository rrepo;
+	
+	@GetMapping("getall")
+	public List<user> getAllProducts(){
+		return rrepo.findAll();
+	}
+	
+	@PostMapping("/registeruser")
+	public user registerUser(@RequestBody user user) throws Exception {
+		String tempEmailId = user.getEmailId();
+				if(tempEmailId !=null && "".equals(tempEmailId)) {
+					user userobj =service.fetchUserByEmailId(tempEmailId);
+					if(userobj != null) {
+						throw new Exception("user with "+tempEmailId+" already exists");
+					}
+					
+				}
+		
+		user userobj = null;
+		userobj = service.saveUser(user);
+		return userobj;
+	}
+	
+	@PostMapping("/login")
+	public user loginUser(@RequestBody user user) throws Exception {
+		String tempEmailId = user.getEmailId();
+		String tempPass = user.getPassword();
+		user userobj =null;
+		if(tempEmailId !=null && tempPass !=null) {
+			 userobj = service.fetchUserByEmailIdAndPassword(tempEmailId, tempPass);
+			
+		}
+		if(userobj==null) {
+			throw new Exception("Bad creddentials");
+		}
+		return userobj;
+	}
+
+}

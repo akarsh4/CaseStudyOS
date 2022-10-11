@@ -1,0 +1,50 @@
+<div class="page-holder align-items-center py-4 bg-gray-100 vh-100" style="padding: 20px;">
+    <div class="card" style="box-shadow: 0 0 10px #aaaaaa;">
+        <div class="row align-items-center">
+            <div class="px-lg-4">
+                <div class="card-header">
+                    <app-navbar></app-navbar>
+                </div>
+                <div class="container">
+                    <div class="screen">
+                        <div class="screen__content">
+                            <h2>Order details</h2>
+                            <form #userPost="ngForm" (ngSubmit)="placeOrder()">
+                                <div class="form-group">
+                                    <label for="user_phone"> Enter contact number</label><br>
+                                    <input type="user_phone" class="form-control" [(ngModel)]="order.order_id"
+                                        name="order.order_id" placeholder="Phone no." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Enter your shipping address</label>
+                                    <textarea class="form-control" [(ngModel)]="order.user_address"
+                                        name="order.user_address" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select the Mode of payment</label>
+                                    <select class="form-control" [(ngModel)]="order.payment" name="order.payment"
+                                        required>
+                                        <option>Cash on delivery</option>
+                                        <option>UPI</option>
+                                        <option>DebitCard</option>
+                                        <option>Net Banking</option>
+                                        <option>others</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-secondary" type="submit" (click)="goToOrderSuccess()">Place Order</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative card-footer">
+                    <div>
+                        <app-footer></app-footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+package com.sonata.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sonata.model.cart;
+import com.sonata.model.orders;
+
+
+
+public interface CartRepository extends JpaRepository<cart,Long>{
+
+}

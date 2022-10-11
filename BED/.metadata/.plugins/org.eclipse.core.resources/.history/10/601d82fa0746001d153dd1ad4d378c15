@@ -1,0 +1,51 @@
+package com.sonata.TestProduct;
+
+
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+
+import java.util.List;
+import java.util.Optional;
+
+
+
+import org.apache.commons.math.stat.descriptive.summary.Product;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.junit.Assert.*;
+
+import com.sonata.model.products;
+import com.sonata.repository.ProductRepository;
+
+
+
+class TestLogin {
+    @Autowired
+    public ProductRepository prepository;
+    Optional<Product> p1;
+    
+      @Test
+      public void getAllProductsTest(){
+        List<products> products = prepository.findAll();
+            Assertions.assertThat(products.size()).isEqualTo(5);           
+            System.out.println(products);
+        }
+    @Test
+     public void testCreate() {
+        products p=new products();
+        p.setProd_id(0);
+        p.setProd_name("shoe");
+        p.setProd_price(20000.0);
+        p.setProd_color("black");
+        p.setProd_category("fashion");
+        prepository.save(p);
+        assertNotNull(prepository.findById(101L).get());
+
+
+
+}
+}

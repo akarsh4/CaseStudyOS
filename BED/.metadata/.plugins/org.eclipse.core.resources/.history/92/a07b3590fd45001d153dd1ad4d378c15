@@ -1,0 +1,65 @@
+package com.sonata.controller;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.sonata.model.orders;
+import com.sonata.repository.OrderRepository;
+
+
+@CrossOrigin(origins="http//localhost:4200")
+@RestController
+
+public class OrderController {
+	Optional<orders> o1;
+	
+	@Autowired
+	private OrderRepository orepository;
+	
+	@GetMapping("/order")
+	public List<orders> getAllOrderItem(){
+		return orepository.findAll();
+	}
+	@GetMapping("/orders/{id}")
+	public ResponseEntity getOrdersById(@PathVariable(value="id") Long prod_id) {
+		o1 = orepository.findById(prod_id);
+		return ResponseEntity.ok().body(o1);
+	}
+	
+	@PostMapping(value="/orders")
+	public  orders saveOrders(@RequestBody orders order) {
+		return orepository.save(order);
+	}
+	
+	@PutMapping(value="/products/{id}")
+	public ResponseEntity updateProducts (@PathVariable(value="id") Long prod_id,
+	@Valid @RequestBody orders odata){
+		o1 = orepository.findById(prod_id);
+		orders e2 = o1.get();
+		e2.setOrder_id(odata.getOrder_id());
+		e2.setOrder_status(odata.getOrder_status());
+		e2.setProd_id(odata.getProd_id());
+		e2.setPayment(odata.getPayment());
+		orders updateProducts =orepository.save(e2);
+		return ResponseEntity.ok(updateProducts);
+	}
+	
+	@DeleteMapping(value="/products/{id}")
+	public ResponseEntity deleteOrders(@PathVariable(value="id")Long prod_id) {
+		orepository.deleteById(prod_id);
+		return ResponseEntity.noContent().build();
+	}
+}

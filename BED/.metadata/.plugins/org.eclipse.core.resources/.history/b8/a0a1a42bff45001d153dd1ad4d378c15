@@ -1,0 +1,5 @@
+package com.sonata.controller;
+
+public class UserController {
+
+}

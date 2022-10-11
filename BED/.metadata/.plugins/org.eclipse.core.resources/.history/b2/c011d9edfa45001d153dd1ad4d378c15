@@ -1,0 +1,33 @@
+package com.sonata;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.sonata.model.products;
+import com.sonata.repository.ProductRepository;
+
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+class ProductServiceApplicationTests {
+    @Autowired
+    private ProductRepository productRepository;
+    private products product;
+    @BeforeEach
+    public void setUp() {
+        product = new products(1,"Samsung","Mobile",50000.00,"Blue");
+    }
+
+    @Test
+    public void givenProductToAddShouldReturnAddedProduct(){
+         productRepository.save(product);
+         products fetchedProduct = productRepository.findById(product.getProd_id()).get();
+         assertEquals(1, fetchedProduct.getProd_id());
+    }
+}

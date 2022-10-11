@@ -1,0 +1,60 @@
+package com.sonata.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class orders{
+	@Id
+	private long order_id;
+	private String payment;
+	private String order_status;
+	private long prod_id;
+	
+public orders(){
+	
+}
+
+public orders(long order_id, long prod_id, String payment, String order_status) {
+	super();
+	this.order_id = order_id;
+	this.prod_id = prod_id;
+	this.payment = payment;
+	this.order_status = order_status;
+}
+
+public long getOrder_id() {
+	return order_id;
+}
+
+public void setOrder_id(long order_id) {
+	this.order_id = order_id;
+}
+
+public long getProd_id() {
+	return prod_id;
+}
+
+public void setProd_id(long prod_id) {
+	this.prod_id = prod_id;
+}
+
+public String getPayment() {
+	return payment;
+}
+
+public void setPayment(String payment) {
+	this.payment = payment;
+}
+
+public String getOrder_status() {
+	return order_status;
+}
+
+public void setOrder_status(String order_status) {
+	this.order_status = order_status;
+}
+
+
+
+}

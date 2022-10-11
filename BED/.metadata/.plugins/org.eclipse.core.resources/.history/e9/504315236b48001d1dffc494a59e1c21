@@ -1,0 +1,49 @@
+package com.sonata.TestProduct;
+
+
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.commons.math.stat.descriptive.summary.Product;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
+
+import com.sonata.controller.ProductController;
+import com.sonata.model.category;
+import com.sonata.model.products;
+import com.sonata.repository.ProductRepository;
+
+
+
+class TestLogin {
+	@MockBean
+	ProductController pcon;
+	
+    @Autowired
+    public ProductRepository prepo;
+    Optional<Product> p1;
+    
+    @Test
+	public void getCat() {
+		when(prepo.findAll()).thenReturn((List<products>) Stream.of(new products(1L,"samsung","Mobile",50000.0,"blue","white","f")).collect(Collectors.toList()));
+		assertEquals(1,pcon.getAllProducts().size());
+	}
+    
+}
+

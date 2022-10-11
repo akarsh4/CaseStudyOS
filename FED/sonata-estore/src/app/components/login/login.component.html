@@ -1,0 +1,51 @@
+<div class="page-holder align-items-center py-4 bg-gray-100 vh-100">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 px-lg-4">
+                <div class="card">
+                    <div class="card-header px-lg-5">
+                        <div class="card-heading text-primary">Login</div>
+                    </div>
+                    <div class="card-body p-lg-5">
+                        <h3 class="mb-4">Hi, welcome back! 👋👋</h3>
+                        <form #loginForm="ngForm" (ngSubmit)="loginUser()">
+                            <div style="padding-bottom: 15px">
+                                <small class="text-danger">{{message}}</small>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" placeholder="Enter Email" name="emailId"
+                                    [(ngModel)]="user.emailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    #emailId="ngModel" [class.is-invalid]="emailId.invalid && emailId.touched" id="emailId">
+                                <div *ngIf="emailId.errors && (emailId.invalid && emailId.touched)">
+                                    <small class="text-danger" *ngIf="emailId.errors.required">Please enter your email</small>
+                                    <small class="text-danger" *ngIf="emailId.errors.pattern">Enter a valid email</small>
+                                </div>
+                                <label for="emailId">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" placeholder="Enter Password" name="password"
+                                    [(ngModel)]="user.password" required #password="ngModel"
+                                    [class.is-invalid]="password.invalid && password.touched" id="password">
+                                <div *ngIf="password.errors && (password.invalid && password.touched)">
+                                    <small class="text-danger" *ngIf="password.errors.required">Please enter your password</small>
+                                </div>
+                                <label for="password">Password</label>
+                            </div>
+                            <button class="btn btn-primary" type="submit" [disabled]="loginForm.form.invalid">Login</button>
+                        </form>
+                    </div>
+                    <div class="card-footer px-lg-5 py-lg-4">
+                        <div class="text-sm text-muted">
+                            Don't have an account?
+                            <a routerLink="/register">Register</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary">
+                <h1 class="mb-4">sonata-estore<br class="d-none d-lg-inline"></h1>
+                <p class="lead text-muted">Your incredable quote or sentence goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="page-holder align-items-center py-4 bg-gray-100 vh-100" style="padding: 20px;">
+    <div class="card" style="box-shadow: 0 0 10px #aaaaaa;">
+        <div class="row align-items-center">
+            <div class="px-lg-4">
+                <div class="card-header">
+                    <app-navbar></app-navbar>
+                </div>
+                <div class="container mt-4 mb-4">
+                    <div class="row">
+                        <div class="col-12 col-lg-4" *ngFor="let prod of product">
+                            <div class="card mb-3 ">
+                                <div class="row g-0" style="height: 300px; width: fit-content" *ngIf="prod">
+                                    <div class="col-md-8">
+                                        <img src="{{prod.prod_image}}" class="img-fluid rounded-start" alt="..."
+                                            style="height: 300px; width: fit-content; align-items: center;">
+                                    </div>
+                                    <div class="col-lg-4" style="padding-top: 15%;">
+                                        <div>
+                                            <p id="prod_name" class="card-title">{{prod.prod_name}}</p>
+                                            <br>
+                                            <p style="font-size: medium;" class="card-text" style="width: 200px;">Price
+                                                : Rs.
+                                                {{prod.prod_price}} </p><br>
+                                            <a routerLink="/product" (click)="addToCart(prod)">
+                                                <button type="button" class="btn btn-secondary" style="width: auto;">Add
+                                                    To Cart
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative card-footer">
+                    <div>
+                        <app-footer></app-footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

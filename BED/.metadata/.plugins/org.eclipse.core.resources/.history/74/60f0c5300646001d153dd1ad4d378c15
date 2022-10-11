@@ -1,0 +1,62 @@
+package com.sonata.mvc.test;
+
+import java.util.List;
+import java.util.Optional;
+
+mport java.util.Optional;
+
+
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+
+
+import java.util.List;
+
+import org.assertj.core.api.AbstractIntegerAssert;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+
+import com.sonata.model.products;
+import com.sonata.repository.ProductRepository;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class ProductTest {
+    @Autowired
+    public ProductRepository prepository;
+    Optional<products> p1;
+    
+ //   @Test
+   /* public void getAllProductsTest(){
+
+
+
+
+
+
+
+       List<products> product = prepository.findAll();
+          Assertions.assertThat(product.size()).isEqualTo(5);
+          
+          System.out.println(product);
+      }*/
+      
+      @Test
+      public void testCreate() {
+          products p=new products();
+          p.setProd_id(101L);
+          p.setProd_name("Samsung");
+          p.setProd_category("Electronics");
+          p.setProd_price(30000);
+          p.setProd_color("fashion");
+          prepository.save(p);
+          assertNotNull(prepository.findById(101L).get());
+      }
+      
+    
+}
